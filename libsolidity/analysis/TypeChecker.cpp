@@ -1811,7 +1811,10 @@ bool TypeChecker::visit(FunctionCall const& _functionCall)
 	bool allowDynamicTypes = m_evmVersion.supportsReturndata();
 	if (!functionType)
 	{
-		m_errorReporter.typeError(_functionCall.location(), "Type is not callable");
+		// this is a fatal type error as we might run into some expectations later where we
+		// expect the type to be present (such as in tuple-assignments, each component must be
+		// properly evaluated and is expected to be present.
+		m_errorReporter.fatalTypeError(_functionCall.location(), "Type is not callable");
 		_functionCall.annotation().type = make_shared<TupleType>();
 		return false;
 	}
