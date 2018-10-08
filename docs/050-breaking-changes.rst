@@ -154,6 +154,12 @@ Command Line and JSON Interfaces
 * The JSON AST fields ``constant`` and ``payable`` were removed. The
   information is now present in the ``stateMutability`` field.
 
+* In unlinked binary hex files, library address placeholders are now
+  the first 36 hex characters of the keccak256 hash of the fully qualified
+  library name, instead of just the fully qualified library name.
+  Binary files now also contain a list of mappings from these hex placeholders
+  to the fully qualified names.
+
 Constructors
 ------------
 
